@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="fastRequestCurrentParamGroup">
+    <option name="className" value="com.shf.eduservice.controller.EduTeacherController" />
+    <option name="method" value="removeById" />
+    <option name="methodType" value="DELETE" />
+    <option name="module" value="service-edu" />
+    <option name="pathParamMap">
+      <map>
+        <entry key="id">
+          <value>
+            <Object />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
