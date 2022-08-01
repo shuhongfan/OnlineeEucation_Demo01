@@ -103,7 +103,8 @@ export default {
       total: 0, // 总记录数
       page: 1, // 页码
       limit: 10, // 每页记录数
-      searchObj: {}// 查询条件
+      searchObj: {},// 查询条件
+
     }
   },
   methods: {
@@ -140,7 +141,7 @@ export default {
           this.$message.error("删除失败")
         }
       })
-    },
+    }
   },
   created() {
     this.fetchData()

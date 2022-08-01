@@ -1,5 +1,6 @@
 package com.shf.servicebase.exception;
 
+import com.shf.commonutils.ResultCodeEnum;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,11 @@ public class GuliException extends RuntimeException{
     private Integer code;
 
     private String msg;
+
+    public GuliException(ResultCodeEnum resultCodeEnum) {
+        this.msg = resultCodeEnum.getMessage();
+        this.code = resultCodeEnum.getCode();
+    }
 
     @Override
     public String toString() {
