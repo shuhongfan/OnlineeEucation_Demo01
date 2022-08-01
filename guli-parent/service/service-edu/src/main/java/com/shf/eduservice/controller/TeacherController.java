@@ -100,11 +100,11 @@ public class TeacherController {
     @GetMapping("{id}")
     public R getByID(@ApiParam(name = "id", value = "讲师ID", required = true)
                      @PathVariable String id) {
-        try {
-            int i = 10 / 0;
-        } catch (Exception e) {
-            throw new GuliException(20001, "出现自定义异常");
-        }
+//        try {
+//            int i = 10 / 0;
+//        } catch (Exception e) {
+//            throw new GuliException(20001, "出现自定义异常");
+//        }
         Teacher teacher = teacherService.getById(id);
         return R.ok().data("item", teacher);
     }
