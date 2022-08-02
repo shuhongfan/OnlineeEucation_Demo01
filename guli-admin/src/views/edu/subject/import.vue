@@ -4,7 +4,7 @@
       <el-form-item label="信息描述">
         <el-tag type="info">excel模版说明</el-tag>
         <el-tag>
-          <i class="el-icon-download" />
+          <i class="el-icon-download"/>
           <a :href="OSS_PATH + '/excel/%E8%AF%BE%E7%A8%8B%E5%88%86%E7%B1%BB%E5%88%97%E8%A1%A8%E6%A8%A1%E6%9D%BF.xlsx'">点击下载模版</a>
         </el-tag>
 
@@ -69,6 +69,7 @@ export default {
         this.fileUploadBtnText = '导入成功'
         this.loading = false
         this.$message.success(response.message)
+        this.$router.push("/edu/subject")
       }
     },
 
