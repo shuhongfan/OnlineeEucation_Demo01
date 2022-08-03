@@ -46,4 +46,12 @@ public interface VideoService extends IService<Video> {
      * @return
      */
     boolean removeVideoById(String id);
+
+    /**
+     * 根据课程id删除小节
+     *
+     * @param id
+     * @return
+     */
+    boolean removeByCourseId(String id);
 }

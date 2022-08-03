@@ -1,6 +1,7 @@
 package com.shf.edu.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.shf.edu.client.VodClient;
 import com.shf.edu.entity.Chapter;
 import com.shf.edu.entity.Video;
 import com.shf.edu.entity.chapter.ChapterVo;
@@ -30,6 +31,9 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
 
     @Autowired
     private VideoService videoService;
+
+    @Autowired
+    private VodClient vodClient;
 
     /**
      * 课程大纲列表
@@ -81,6 +85,7 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
         if (videoService.getCountByChapterId(id)) {
             throw new GuliException(20001, "该章节下存在视频课程，请先删除视频课程");
         }
+
         int res = baseMapper.deleteById(id);
         return res > 0;
     }

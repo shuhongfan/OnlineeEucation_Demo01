@@ -175,7 +175,7 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     @Override
     public boolean removeCourseById(String id) {
 //        1. 根据课程id删除小节
-        videoService.removeVideoById(id);
+        videoService.removeByCourseId(id);
 //        2.根据课程id删除章节
         chapterService.remoChapterByCourseId(id);
 //        3.根据课程id删除描述

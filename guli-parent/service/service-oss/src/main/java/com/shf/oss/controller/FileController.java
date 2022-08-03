@@ -28,4 +28,5 @@ public class FileController {
         String uploadUrl = fileService.upload(file,host);
         return R.ok().message("文件上传成功").data("url", uploadUrl);
     }
+
 }

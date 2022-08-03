@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Api("阿里云视频点播微服务")
 @CrossOrigin
 @RestController
@@ -31,6 +33,16 @@ public class VideoAdminController {
             @ApiParam(name = "videoId", value = "云端视频ID", required = true)
             @PathVariable String videoId) {
         videoService.removeVideo(videoId);
+        return R.ok().message("视频删除成功");
+    }
+
+    @ApiOperation("批量删除视频")
+    @DeleteMapping("delete-batch")
+    public R removeVideoList(
+            @ApiParam(name = "videoIdList", value = "云端视频ID", required = true)
+            @RequestParam("videoList") List<String> videoList
+    ) {
+        videoService.removeVideoList(videoList);
         return R.ok().message("视频删除成功");
     }
 }

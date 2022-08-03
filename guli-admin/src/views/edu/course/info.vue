@@ -144,15 +144,15 @@ export default {
   methods: {
     //根据课程id查询
     getInfo() {
-      course.getListTeacher(this.courseId)
+      course.getCourseInfoId(this.courseId)
         .then(response => {
           //在courseInfo课程基本信息，包含 一级分类id 和 二级分类id
-          this.courseInfo = response.data.courseInfoVo
+          this.courseInfo = response.data.item
           //1 查询所有的分类，包含一级和二级
           subject.getSubjectList()
             .then(response => {
               //2 获取所有一级分类
-              this.subjectOneList = response.data.list
+              this.subjectOneList = response.data.items
               //3 把所有的一级分类数组进行遍历，
               for (var i = 0; i < this.subjectOneList.length; i++) {
                 //获取每个一级分类
