@@ -1,32 +1,58 @@
 import request from '@/utils/request'
 
-const API_NAME = '/admin/edu/course'
-
 export default {
-  saveCourseInfo(courseInfoVo) {
+  //1 添加课程信息
+  addCourseInfo(courseInfo) {
     return request({
-      url: `${API_NAME}/save-course-info`,
+      url: '/admin/edu/course/save-course-info',
       method: 'post',
-      data: courseInfoVo
+      data: courseInfo
     })
   },
+  //2 查询所有讲师
   getListTeacher() {
     return request({
-      url: `/admin/edu/teacher`,
+      url: '/admin/edu/teacher',
       method: 'get'
     })
   },
-  getCourseInfoFormById(id) {
+  //根据课程id查询课程基本信息
+  getCourseInfoId(id) {
     return request({
-      url: `${API_NAME}/course-info/${id}`,
+      url: '/admin/edu/course/course-info/' + id,
       method: 'get'
     })
   },
-  updateCourseInfoById(courseInfoVo) {
+  //修改课程信息
+  updateCourseInfo(courseInfo) {
     return request({
-      url: `${API_NAME}/update-course-info`,
+      url: '/admin/edu/course/update-course-info',
       method: 'put',
-      data: courseInfoVo
+      data: courseInfo
     })
   },
+  //课程确认信息显示
+  getPublihCourseInfo(id) {
+    return request({
+      url: '/admin/edu/course/course-publish-info/' + id,
+      method: 'get'
+    })
+  },
+  //课程最终发布
+  publihCourse(id) {
+    return request({
+      url: '/admin/edu/course/publish-course/' + id,
+      method: 'post'
+    })
+  },
+  //TODO 课程列表
+  //课程最终发布
+  getListCourse(page, limit, obj) {
+    return request({
+      url: `/admin/edu/course/${page}/${limit}`,
+      method: 'get',
+      params: obj
+    })
+  }
+
 }

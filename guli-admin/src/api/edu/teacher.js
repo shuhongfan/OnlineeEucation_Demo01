@@ -1,39 +1,46 @@
 import request from '@/utils/request'
 
-const API_NAME = '/admin/edu/teacher'
-
 export default {
-  getPageList(page, limit, searchObj) {
+  //1 讲师列表（条件查询分页）
+  //current当前页 limit每页记录数 teacherQuery条件对象
+  getTeacherListPage(current, limit, teacherQuery) {
     return request({
-      url: `${API_NAME}/${page}/${limit}`,
+      //url: '/admin/edu/teacher/pageTeacherCondition/'+current+"/"+limit,
+      url: `/admin/edu/teacher/${current}/${limit}`,
       method: 'post',
-      data: searchObj
+      //teacherQuery条件对象，后端使用RequestBody获取数据
+      //data表示把对象转换json进行传递到接口里面
+      data: teacherQuery
     })
   },
-  deleteById(id) {
+  //删除讲师
+  deleteTeacherId(id) {
     return request({
-      url: `${API_NAME}/${id}`,
+      url: `/admin/edu/teacher/${id}`,
       method: 'delete'
     })
   },
-  save(teacher) {
+  //添加讲师
+  addTeacher(teacher) {
     return request({
-      url: `${API_NAME}`,
+      url: `/admin/edu/teacher`,
       method: 'post',
       data: teacher
     })
   },
-  getByID(id) {
+  //根据id查询讲师
+  getTeacherInfo(id) {
     return request({
-      url: `${API_NAME}/${id}`,
+      url: `/admin/edu/teacher/${id}`,
       method: 'get'
     })
   },
-  updateById(teacher) {
+  //修改讲师
+  updateTeacherInfo(teacher) {
     return request({
-      url: `${API_NAME}/${teacher.id}`,
+      url: `/admin/edu/teacher/`,
       method: 'put',
       data: teacher
     })
-  },
+  }
 }

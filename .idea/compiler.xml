@@ -7,12 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="service-edu" />
+        <module name="service-base" />
         <module name="api-gateway" />
         <module name="common-utils" />
         <module name="service-oss" />
-        <module name="service-edu" />
-        <module name="service-base" />
         <module name="mybatis-plus" />
+        <module name="service-vod" />
       </profile>
     </annotationProcessing>
   </component>
@@ -27,6 +28,7 @@
       <module name="service-base" options="-parameters" />
       <module name="service-edu" options="-parameters" />
       <module name="service-oss" options="-parameters" />
+      <module name="service-vod" options="-parameters" />
     </option>
   </component>
 </project>

@@ -108,15 +108,11 @@ public class TeacherController {
     }
 
     @ApiOperation("根据ID修改讲师")
-    @PutMapping("{id}")
+    @PutMapping()
     public R updateById(
-            @ApiParam(name = "id", value = "讲师ID", required = true)
-            @PathVariable String id,
-
             @ApiParam(name = "teacher", value = "讲师对象", required = true)
             @RequestBody Teacher teacher
     ) {
-        teacher.setId(id);
         teacherService.updateById(teacher);
         return R.ok();
     }

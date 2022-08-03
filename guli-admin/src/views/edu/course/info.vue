@@ -21,8 +21,7 @@
       <el-form-item label="课程分类">
         <el-select
           v-model="courseInfo.subjectParentId"
-          placeholder="一级分类"
-          @change="subjectLevelOneChanged">
+          placeholder="一级分类" @change="subjectLevelOneChanged">
 
           <el-option
             v-for="subject in subjectOneList"
@@ -65,6 +64,7 @@
       </el-form-item>
 
       <!-- 课程简介 TODO -->
+      <!-- 课程简介-->
       <el-form-item label="课程简介">
         <tinymce :height="300" v-model="courseInfo.description"/>
       </el-form-item>
@@ -78,9 +78,9 @@
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
-          :action="BASE_API+'/admin/oss/file/upload?host=cover'"
+          :action="BASE_API+'/eduoss/fileoss'"
           class="avatar-uploader">
-          <img style="width: 200px" :src="courseInfo.cover">
+          <img :src="courseInfo.cover">
         </el-upload>
 
       </el-form-item>
@@ -100,19 +100,10 @@
 <script>
 import course from '@/api/edu/course'
 import subject from '@/api/edu/subject'
-import Tinymce from '@/components/Tinymce'
+import Tinymce from '@/components/Tinymce' //引入组件
 
-let defaultForm = {
-  title: '',
-  subjectId: '',//二级分类id
-  subjectParentId: '',//一级分类id
-  teacherId: '',
-  lessonNum: 0,
-  description: '',
-  cover: process.env.VUE_APP_OSS_PATH + '/avatar/default.jpg',
-  price: 0
-}
 export default {
+  //声明组件
   components: {Tinymce},
   data() {
     return {
@@ -127,6 +118,7 @@ export default {
         cover: process.env.VUE_APP_OSS_PATH + '/avatar/default.jpg',
         price: 0
       },
+      courseId: '',
       BASE_API: process.env.VUE_APP_BASE_API, // 接口API地址
       teacherList: [],//封装所有的讲师
       subjectOneList: [],//一级分类
@@ -134,18 +126,48 @@ export default {
     }
   },
   created() {
+
+    //获取路由id值
     if (this.$route.params && this.$route.params.id) {
-      this.courseId=this.$route.params.id
-      this.getCourseInfoFormById(this.courseId)
+      this.courseId = this.$route.params.id
+      //调用根据id查询课程的方法
+      this.getInfo()
+
     } else {
-      this.courseInfo = { ...defaultForm}
       //初始化所有讲师
-      this.getListTeacher();
+      this.getListTeacher()
       //初始化一级分类
       this.getOneSubject()
     }
+
   },
   methods: {
+    //根据课程id查询
+    getInfo() {
+      course.getListTeacher(this.courseId)
+        .then(response => {
+          //在courseInfo课程基本信息，包含 一级分类id 和 二级分类id
+          this.courseInfo = response.data.courseInfoVo
+          //1 查询所有的分类，包含一级和二级
+          subject.getSubjectList()
+            .then(response => {
+              //2 获取所有一级分类
+              this.subjectOneList = response.data.list
+              //3 把所有的一级分类数组进行遍历，
+              for (var i = 0; i < this.subjectOneList.length; i++) {
+                //获取每个一级分类
+                var oneSubject = this.subjectOneList[i]
+                //比较当前courseInfo里面一级分类id和所有的一级分类id
+                if (this.courseInfo.subjectParentId == oneSubject.id) {
+                  //获取一级分类所有的二级分类
+                  this.subjectTwoList = oneSubject.children
+                }
+              }
+            })
+          //初始化所有讲师
+          this.getListTeacher()
+        })
+    },
     //上传封面成功调用的方法
     handleAvatarSuccess(res, file) {
       this.courseInfo.cover = res.data.url
@@ -165,70 +187,69 @@ export default {
     },
     //点击某个一级分类，触发change，显示对应二级分类
     subjectLevelOneChanged(value) {
-      this.subjectOneList.forEach(sub => {
-        if (sub.id == value) {
-          // 从一级分类获取里面所有的二级分类
-          this.subjectTwoList = sub.children
-          // 把二级分类id值清空
+      //value就是一级分类id值
+      //遍历所有的分类，包含一级和二级
+      for (var i = 0; i < this.subjectOneList.length; i++) {
+        //每个一级分类
+        var oneSubject = this.subjectOneList[i]
+        //判断：所有一级分类id 和 点击一级分类id是否一样
+        if (value === oneSubject.id) {
+          //从一级分类获取里面所有的二级分类
+          this.subjectTwoList = oneSubject.children
+          //把二级分类id值清空
           this.courseInfo.subjectId = ''
         }
-      })
+      }
     },
     //查询所有的一级分类
-    async getOneSubject() {
-      let res = await subject.getNestedTreeList();
-      if (res.code === 20000) {
-        this.subjectOneList = res.data.items
-      }
+    getOneSubject() {
+      subject.getSubjectList()
+        .then(response => {
+          this.subjectOneList = response.data.items
+        })
     },
     //查询所有的讲师
-    async getListTeacher() {
-      let res = await course.getListTeacher();
-      if (res.code === 20000) {
-        this.teacherList = res.data.items
-      }
+    getListTeacher() {
+      course.getListTeacher()
+        .then(response => {
+          this.teacherList = response.data.items
+        })
     },
-    addCourse: async function () {
-      let res = await course.saveCourseInfo(this.courseInfo);
-      if (res.code === 20000) {
-        this.$message.success("添加课程信息成功!")
-        //跳转到第二步
-        this.$router.push({path: '/course/chapter/' + res.data.courseId})
-      }
+    //添加课程
+    addCourse() {
+      course.addCourseInfo(this.courseInfo)
+        .then(response => {
+          //提示
+          this.$message({
+            type: 'success',
+            message: '添加课程信息成功!'
+          });
+          //跳转到第二步
+          this.$router.push({path: '/edu/course/chapter/' + response.data.courseId})
+        })
     },
-    updateCourse: async function () {
-      let res = await course.updateCourseInfoById(this.courseInfo);
-      if (res.code === 20000) {
-        this.$message.success("修改课程信息成功!")
-        //跳转到第二步
-        this.$router.push({path: '/edu/course/chapter/' + res.data.courseId})
-      }
+    //修改课程
+    updateCourse() {
+      course.updateCourseInfo(this.courseInfo)
+        .then(response => {
+          //提示
+          this.$message({
+            type: 'success',
+            message: '修改课程信息成功!'
+          });
+          //跳转到第二步
+          this.$router.push({path: '/edu/course/chapter/' + this.courseId})
+        })
     },
     saveOrUpdate() {
-      if (this.courseInfo.id) {
-        this.updateCourse()
-      } else {
+      //判断添加还是修改
+      if (!this.courseInfo.id) {
+        //添加
         this.addCourse()
+      } else {
+        this.updateCourse()
       }
-    },
-    async getCourseInfoFormById(id) {
-      let res = await course.getCourseInfoFormById(id);
-      if (res.code === 20000) {
-        this.courseInfo = res.data.item
-      }
-      // 初始化分类列表
-      let response = await subject.getNestedTreeList();
-      if (response.code === 20000) {
-        this.subjectOneList = response.data.items;
-        this.subjectOneList.forEach(subjectOne=>{
-          if (subjectOne.id == this.courseInfo.subjectParentId) {
-            this.subjectTwoList = subjectOne.children
-          }
-        })
-      }
-      // 获取讲师列表
-      this.getListTeacher()
-    },
+    }
   }
 }
 </script>

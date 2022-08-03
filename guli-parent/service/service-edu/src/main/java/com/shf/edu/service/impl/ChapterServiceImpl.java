@@ -9,6 +9,7 @@ import com.shf.edu.mapper.ChapterMapper;
 import com.shf.edu.service.ChapterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.shf.edu.service.VideoService;
+import com.shf.servicebase.exception.GuliException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,5 +68,31 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
         });
 
         return chapterVoList;
+    }
+
+    /**
+     * 根据ID删除章节
+     * @param id
+     * @return
+     */
+    @Override
+    public boolean remoChapterById(String id) {
+//        根据id查询是否存在视频，如果有自提示用户尚有子节点
+        if (videoService.getCountByChapterId(id)) {
+            throw new GuliException(20001, "该章节下存在视频课程，请先删除视频课程");
+        }
+        int res = baseMapper.deleteById(id);
+        return res > 0;
+    }
+
+    /**
+     * 根据课程id删除章节
+     * @param id
+     */
+    @Override
+    public void remoChapterByCourseId(String id) {
+        QueryWrapper<Chapter> wrapper = new QueryWrapper<>();
+        wrapper.eq("course_id", id);
+        baseMapper.delete(wrapper);
     }
 }

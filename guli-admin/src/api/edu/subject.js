@@ -1,11 +1,10 @@
 import request from '@/utils/request'
 
-const API_NAME = '/admin/edu/subject'
-
 export default {
-  getNestedTreeList() {
+  //1 课程分类列表
+  getSubjectList() {
     return request({
-      url: `${API_NAME}`,
+      url: '/admin/edu/subject',
       method: 'get'
     })
   }
