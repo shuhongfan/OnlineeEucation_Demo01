@@ -1,22 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shf.edu.mapper.CourseMapper">
+    <select id="selectCoursePublishVoById" resultType="com.shf.edu.entity.vo.CoursePublishVo">
+        SELECT c.title,
+               c.cover,
+               c.lesson_num                    AS lessonNum,
+               CONVERT(c.price, DECIMAL(8, 2)) AS price,
+               s1.title                        AS subjectLevelOne,
+               s2.title                        AS subjectLevelTwo,
+               t.name                          AS teacherName
+        FROM edu_course c
+                 LEFT JOIN edu_teacher t ON c.teacher_id = t.id
+                 LEFT JOIN edu_subject s1 ON c.subject_parent_id = s1.id
+                 LEFT JOIN edu_subject s2 ON c.subject_id = s2.id
+        WHERE c.id = #{id}
+    </select>
 
-<select id="selectCoursePublishVoById" resultType="com.shf.edu.entity.vo.CoursePublishVo">
-    SELECT
-    c.title,
-    c.cover,
-    c.lesson_num AS lessonNum,
-    CONVERT(c.price, DECIMAL(8,2)) AS price,
-    s1.title AS subjectLevelOne,
-    s2.title AS subjectLevelTwo,
-    t.name AS teacherName
-    FROM
-    edu_course c
-    LEFT JOIN edu_teacher t ON c.teacher_id = t.id
-    LEFT JOIN edu_subject s1 ON c.subject_parent_id = s1.id
-    LEFT JOIN edu_subject s2 ON c.subject_id = s2.id
-    WHERE
-    c.id = #{id}
-</select>
+    <select id="selectInfoWebById" resultType="com.shf.edu.entity.vo.CourseWebVo">
+        select c.id,
+               c.title,
+               c.cover,
+               CONVERT(c.price, DECIMAL(8, 2)) as price,
+               c.lesson_num                    as lessionNum,
+               c.cover,
+               c.buy_count                     as buyCount,
+               c.view_count                    as viewCount,
+
+               cd.description,
+
+               t.id                            as teacherId,
+               t.name                          as teacherName,
+               t.intro,
+               t.avatar,
+
+               s1.id                           AS subjectLevelOneId,
+               s1.title                        AS subjectLevelOne,
+               s2.id                           AS subjectLevelTwoId,
+               s2.title                        AS subjectLevelTwo
+
+        from edu_course c
+                 left join edu_course_description cd on c.id = cd.id
+                 left join edu_teacher t on c.teacher_id = t.id
+                 left join edu_subject s1 on c.subject_parent_id = s1.id
+                 left join edu_subject s2 on c.subject_id = s2.id
+        where c.id = #{courseId}
+    </select>
 </mapper>

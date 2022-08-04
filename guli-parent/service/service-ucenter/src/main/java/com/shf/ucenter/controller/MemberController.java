@@ -3,11 +3,13 @@ package com.shf.ucenter.controller;
 
 import com.shf.commonutils.JwtUtils;
 import com.shf.commonutils.R;
+import com.shf.commonutils.ordervo.UcenterMemberOrder;
 import com.shf.ucenter.entity.Member;
 import com.shf.ucenter.entity.vo.LoginVo;
 import com.shf.ucenter.entity.vo.RegisterVo;
 import com.shf.ucenter.service.MemberService;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +51,15 @@ public class MemberController {
         String memberId = JwtUtils.getMemberIdByJwtToken(request);
         Member member = memberService.getLoginInfo(memberId);
         return R.ok().data("item", member);
+    }
+
+    @PostMapping("getInfoUc/{id}")
+    public UcenterMemberOrder getInfo(@PathVariable String id) {
+//        根据用户id获取用户信息
+        Member member = memberService.getById(id);
+        UcenterMemberOrder ucenterMemberOrder = new UcenterMemberOrder();
+        BeanUtils.copyProperties(member, ucenterMemberOrder);
+        return ucenterMemberOrder;
     }
 }
 

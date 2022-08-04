@@ -21,7 +21,7 @@
                 <li v-for="(item,index) in subjectNestedList" :key="index" :class="{active:oneIndex==index}">
                   <a :title="item.title" href="#" @click="searchOne(item.id,index)">{{item.title}}</a>
                 </li>
-               
+
               </ul>
             </dd>
           </dl>
@@ -34,7 +34,7 @@
                 <li v-for="(item,index) in subSubjectList" :key="index" :class="{active:twoIndex==index}">
                   <a :title="item.title" href="#" @click="searchTwo(item.id,index)">{{item.title}}</a>
                 </li>
-               
+
               </ul>
             </dd>
           </dl>
@@ -99,7 +99,7 @@
                   </section>
                 </div>
               </li>
-              
+
             </ul>
             <div class="clear"></div>
           </article>
@@ -160,7 +160,7 @@ export default {
       twoIndex:-1,
       buyCountSort:"",
       gmtCreateSort:"",
-      priceSort:""
+      priceSort:"",
     }
   },
   created() {
@@ -181,7 +181,7 @@ export default {
     initSubject() {
       courseApi.getAllSubject()
         .then(response => {
-          this.subjectNestedList = response.data.data.list
+          this.subjectNestedList = response.data.data.items
         })
     },
 

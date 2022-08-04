@@ -183,7 +183,7 @@ export default {
         .then(response => {
           // console.log('################'+response.data.data.userInfo)
            this.loginInfo = response.data.data.item
-           cookie.set('guli_ucenter',this.loginInfo,{domain: 'localhost'})
+           cookie.set('guli_ucenter',JSON.stringify(this.loginInfo),{domain: 'localhost'})
         })
     },
     //创建方法，从cookie获取用户信息

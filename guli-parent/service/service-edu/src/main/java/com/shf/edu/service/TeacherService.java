@@ -6,6 +6,7 @@ import com.shf.edu.entity.Teacher;
 import com.shf.edu.query.TeacherQuery;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -30,4 +31,11 @@ public interface TeacherService extends IService<Teacher> {
      * @return
      */
     List<Teacher> first4Teacher();
+
+    /**
+     * 分页讲师列表
+     * @param pageParam
+     * @return
+     */
+    Map<String, Object> pageListWeb(Page<Teacher> pageParam);
 }

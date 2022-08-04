@@ -6,8 +6,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.shf.edu.entity.CourseQuery;
 import com.shf.edu.entity.vo.CourseInfoVo;
 import com.shf.edu.entity.vo.CoursePublishVo;
+import com.shf.edu.entity.vo.CourseQueryVo;
+import com.shf.edu.entity.vo.CourseWebVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -73,4 +76,32 @@ public interface CourseService extends IService<Course> {
      * @return
      */
     List<Course> first8Course();
+
+    /**
+     * 根据讲师id查询出这个讲师的课程列表
+     * @param id
+     * @return
+     */
+    List<Course> selectByTeacherId(String id);
+
+    /**
+     * 分页课程列表
+     * @param pageParam
+     * @param courseQuery
+     * @return
+     */
+    Map<String, Object> pageListWeb(Page<Course> pageParam, CourseQueryVo courseQuery);
+
+    /**
+     * 查询课程信息和讲师信息
+     * @param courseId
+     * @return
+     */
+    CourseWebVo selectInfoWebById(String courseId);
+
+    /**
+     * 更新课程浏览数
+     * @param id
+     */
+    void updatePageViewCount(String id);
 }

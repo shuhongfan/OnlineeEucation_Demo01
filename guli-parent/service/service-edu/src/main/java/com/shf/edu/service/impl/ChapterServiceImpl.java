@@ -100,4 +100,5 @@ public class ChapterServiceImpl extends ServiceImpl<ChapterMapper, Chapter> impl
         wrapper.eq("course_id", id);
         baseMapper.delete(wrapper);
     }
+
 }

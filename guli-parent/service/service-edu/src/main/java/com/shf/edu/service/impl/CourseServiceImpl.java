@@ -7,6 +7,8 @@ import com.shf.edu.entity.CourseDescription;
 import com.shf.edu.entity.CourseQuery;
 import com.shf.edu.entity.vo.CourseInfoVo;
 import com.shf.edu.entity.vo.CoursePublishVo;
+import com.shf.edu.entity.vo.CourseQueryVo;
+import com.shf.edu.entity.vo.CourseWebVo;
 import com.shf.edu.mapper.CourseMapper;
 import com.shf.edu.service.ChapterService;
 import com.shf.edu.service.CourseDescriptionService;
@@ -19,7 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -197,6 +201,80 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         courseQueryWrapper.orderByDesc("id")
                 .last("limit 8");
         return baseMapper.selectList(courseQueryWrapper);
+    }
+
+    /**
+     * 根据讲师id查询出这个讲师的课程列表
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Course> selectByTeacherId(String id) {
+        QueryWrapper<Course> courseQueryWrapper = new QueryWrapper<>();
+        courseQueryWrapper.eq("teacher_id", id)
+                .orderByDesc("gmt_modified");
+
+        List<Course> courseList = baseMapper.selectList(courseQueryWrapper);
+        return courseList;
+    }
+
+    /**
+     * 分页课程列表
+     * @param pageParam
+     * @param courseQuery
+     * @return
+     */
+    @Override
+    public Map<String, Object> pageListWeb(Page<Course> pageParam, CourseQueryVo courseQuery) {
+        QueryWrapper<Course> courseQueryWrapper = new QueryWrapper<>();
+        courseQueryWrapper
+                .eq(!StringUtils.isEmpty(courseQuery.getSubjectParentId()), "subject_parent_id", courseQuery.getSubjectParentId())
+                .eq(!StringUtils.isEmpty(courseQuery.getSubjectId()), "subject_id", courseQuery.getSubjectId())
+                .orderByDesc(!StringUtils.isEmpty(courseQuery.getBuyCountSort()), "buy_count")
+                .orderByDesc(!StringUtils.isEmpty(courseQuery.getGmtCreateSort()), "gmt_create")
+                .orderByDesc(!StringUtils.isEmpty(courseQuery.getPriceSort()), "price");
+
+        baseMapper.selectPage(pageParam, courseQueryWrapper);
+        List<Course> records = pageParam.getRecords();
+        long current = pageParam.getCurrent();
+        long pages = pageParam.getPages();
+        long size = pageParam.getSize();
+        long total = pageParam.getTotal();
+        boolean hasNext = pageParam.hasNext();
+        boolean hasPrevious = pageParam.hasPrevious();
+
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("items", records);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+
+        return map;
+    }
+
+    /**
+     * 查询课程信息和讲师信息
+     * @param courseId
+     * @return
+     */
+    @Override
+    public CourseWebVo selectInfoWebById(String courseId) {
+        this.updatePageViewCount(courseId);
+        return baseMapper.selectInfoWebById(courseId);
+    }
+
+    /**
+     * 更新课程浏览数
+     * @param id
+     */
+    @Override
+    public void updatePageViewCount(String id) {
+        Course course = baseMapper.selectById(id);
+        course.setViewCount(course.getViewCount() + 1);
+        baseMapper.updateById(course);
     }
 
 }

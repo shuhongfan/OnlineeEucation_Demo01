@@ -3,6 +3,7 @@ package com.shf.edu.mapper;
 import com.shf.edu.entity.Course;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.shf.edu.entity.vo.CoursePublishVo;
+import com.shf.edu.entity.vo.CourseWebVo;
 
 /**
  * <p>
@@ -19,4 +20,11 @@ public interface CourseMapper extends BaseMapper<Course> {
      * @return
      */
     CoursePublishVo selectCoursePublishVoById(String id);
+
+    /**
+     * 查询课程信息和讲师信息
+     * @param courseId
+     * @return
+     */
+    CourseWebVo selectInfoWebById(String courseId);
 }

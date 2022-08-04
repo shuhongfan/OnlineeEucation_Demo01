@@ -10,7 +10,9 @@ import com.shf.edu.service.TeacherService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -62,6 +64,37 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         teacherQueryWrapper.orderByDesc("id")
                 .last("limit 4");
         return baseMapper.selectList(teacherQueryWrapper);
+    }
+
+    /**
+     * 分页讲师列表
+     * @param pageParam
+     * @return
+     */
+    @Override
+    public Map<String, Object> pageListWeb(Page<Teacher> pageParam) {
+        QueryWrapper<Teacher> teacherQueryWrapper = new QueryWrapper<>();
+        teacherQueryWrapper.orderByAsc("sort");
+        baseMapper.selectPage(pageParam, teacherQueryWrapper);
+
+        List<Teacher> records = pageParam.getRecords();
+        long current = pageParam.getCurrent();
+        long size = pageParam.getSize();
+        long pages = pageParam.getPages();
+        long total = pageParam.getTotal();
+        boolean hasNext = pageParam.hasNext();
+        boolean hasPrevious = pageParam.hasPrevious();
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("items", records);
+        map.put("current", current);
+        map.put("pages", pages);
+        map.put("size", size);
+        map.put("total", total);
+        map.put("hasNext", hasNext);
+        map.put("hasPrevious", hasPrevious);
+
+        return map;
     }
 
 

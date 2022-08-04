@@ -35,4 +35,5 @@ public interface ChapterService extends IService<Chapter> {
      * @param id
      */
     void remoChapterByCourseId(String id);
+
 }
