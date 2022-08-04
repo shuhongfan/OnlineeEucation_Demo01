@@ -12,6 +12,7 @@
         <module name="api-gateway" />
         <module name="common-utils" />
         <module name="service-oss" />
+        <module name="service-cms" />
         <module name="mybatis-plus" />
         <module name="service-vod" />
       </profile>
@@ -26,6 +27,7 @@
       <module name="mybatis-plus" options="-parameters" />
       <module name="service" options="" />
       <module name="service-base" options="-parameters" />
+      <module name="service-cms" options="-parameters" />
       <module name="service-edu" options="-parameters" />
       <module name="service-oss" options="-parameters" />
       <module name="service-vod" options="-parameters" />

@@ -10,6 +10,8 @@ import com.shf.edu.service.TeacherService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 /**
  * <p>
  * 讲师 服务实现类
@@ -48,6 +50,18 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
                 .le(!StringUtils.isEmpty(end), "gmt_create", end);
 
         baseMapper.selectPage(eduTeacherPage, teacherQueryWrapper);
+    }
+
+    /**
+     * 查询前4条名师
+     * @return
+     */
+    @Override
+    public List<Teacher> first4Teacher() {
+        QueryWrapper<Teacher> teacherQueryWrapper = new QueryWrapper<>();
+        teacherQueryWrapper.orderByDesc("id")
+                .last("limit 4");
+        return baseMapper.selectList(teacherQueryWrapper);
     }
 
 

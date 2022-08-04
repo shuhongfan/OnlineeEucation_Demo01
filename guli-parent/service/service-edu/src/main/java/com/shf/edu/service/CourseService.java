@@ -7,6 +7,8 @@ import com.shf.edu.entity.CourseQuery;
 import com.shf.edu.entity.vo.CourseInfoVo;
 import com.shf.edu.entity.vo.CoursePublishVo;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程 服务类
@@ -65,4 +67,10 @@ public interface CourseService extends IService<Course> {
      * @return
      */
     boolean removeCourseById(String id);
+
+    /**
+     * 查询前8条热门课程
+     * @return
+     */
+    List<Course> first8Course();
 }

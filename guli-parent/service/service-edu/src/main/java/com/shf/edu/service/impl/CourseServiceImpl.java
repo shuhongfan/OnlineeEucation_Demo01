@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程 服务实现类
@@ -184,4 +186,17 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         int result = baseMapper.deleteById(id);
         return result>0;
     }
+
+    /**
+     * 查询前8条热门课程
+     * @return
+     */
+    @Override
+    public List<Course> first8Course() {
+        QueryWrapper<Course> courseQueryWrapper = new QueryWrapper<>();
+        courseQueryWrapper.orderByDesc("id")
+                .last("limit 8");
+        return baseMapper.selectList(courseQueryWrapper);
+    }
+
 }

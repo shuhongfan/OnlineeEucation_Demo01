@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.shf.edu.entity.Teacher;
 import com.shf.edu.query.TeacherQuery;
 
+import java.util.List;
+
 /**
  * <p>
  * 讲师 服务类
@@ -22,4 +24,10 @@ public interface TeacherService extends IService<Teacher> {
      * @param teacherQuery
      */
     void pageQuery(Page<Teacher> eduTeacherPage, TeacherQuery teacherQuery);
+
+    /**
+     * 查询前4条名师
+     * @return
+     */
+    List<Teacher> first4Teacher();
 }
