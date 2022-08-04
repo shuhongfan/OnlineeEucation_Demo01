@@ -10,7 +10,9 @@
     <file url="file://$PROJECT_DIR$/guli-parent/infrastructure/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/guli-parent/service/service-cms/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/guli-parent/service/service-edu/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/guli-parent/service/service-msm/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/guli-parent/service/service-oss/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/guli-parent/service/service-ucenter/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/guli-parent/service/service-vod/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/guli-parent/service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/guli-parent/service/src/main/resources" charset="UTF-8" />

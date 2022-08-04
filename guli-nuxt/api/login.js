@@ -4,7 +4,7 @@ export default {
     //登录的方法
   submitLoginUser(userInfo) {
     return request({
-      url: `/educenter/member/login`,
+      url: `/ucenter/member/login`,
       method: 'post',
       data: userInfo
     })
@@ -13,7 +13,7 @@ export default {
   //根据token获取用户信息
   getLoginUserInfo() {
     return request({
-      url: `/educenter/member/getMemberInfo`,
+      url: `/ucenter/member/auth/getLoginInfo`,
       method: 'get'
     })
   }

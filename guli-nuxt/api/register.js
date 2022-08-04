@@ -4,7 +4,7 @@ export default {
     //根据手机号发验证码
   sendCode(phone) {
     return request({
-      url: `/edumsm/msm/send/${phone}`,
+      url: `/msm/api/send/${phone}`,
       method: 'get'
     })
   },
@@ -12,7 +12,7 @@ export default {
   //注册的方法
   registerMember(formItem) {
     return request({
-      url: `/educenter/member/register`,
+      url: `/ucenter/member/register`,
       method: 'post',
       data: formItem
     })
