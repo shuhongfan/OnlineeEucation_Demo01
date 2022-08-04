@@ -34,4 +34,11 @@ public interface MemberService extends IService<Member> {
      * @return
      */
     Member getLoginInfo(String memberId);
+
+    /**
+     * 查询数据库当前用户是否曾经使用过微信登录
+     * @param openid
+     * @return
+     */
+    Member getByOpenId(String openid);
 }

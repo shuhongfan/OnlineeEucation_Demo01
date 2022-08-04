@@ -78,7 +78,7 @@
       </section>
     </header>
     <!-- /公共头引入 -->
-      
+
     <nuxt/>
 
     <!-- 公共底引入 -->
@@ -182,7 +182,7 @@ export default {
       loginApi.getLoginUserInfo()
         .then(response => {
           // console.log('################'+response.data.data.userInfo)
-           this.loginInfo = response.data.data.userInfo
+           this.loginInfo = response.data.data.item
            cookie.set('guli_ucenter',this.loginInfo,{domain: 'localhost'})
         })
     },

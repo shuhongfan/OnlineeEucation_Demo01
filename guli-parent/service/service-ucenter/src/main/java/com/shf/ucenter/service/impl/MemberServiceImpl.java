@@ -120,4 +120,17 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         member.setPassword("");
         return member;
     }
+
+    /**
+     * 查询数据库当前用户是否曾经使用过微信登录
+     * @param openid
+     * @return
+     */
+    @Override
+    public Member getByOpenId(String openid) {
+        QueryWrapper<Member> memberQueryWrapper = new QueryWrapper<>();
+        memberQueryWrapper.eq("openid", openid);
+        return baseMapper.selectOne(memberQueryWrapper);
+    }
+
 }
