@@ -1,10 +1,13 @@
 package com.shf.edu.controller.front;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.shf.commonutils.JwtUtils;
 import com.shf.commonutils.R;
+import com.shf.edu.client.OrderClient;
 import com.shf.edu.entity.Course;
 import com.shf.edu.entity.Teacher;
 import com.shf.edu.entity.chapter.ChapterVo;
+import com.shf.edu.entity.vo.CourseInfoVo;
 import com.shf.edu.entity.vo.CourseQueryVo;
 import com.shf.edu.entity.vo.CourseWebVo;
 import com.shf.edu.service.ChapterService;
@@ -16,6 +19,7 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +35,8 @@ public class CourseAPIController {
     @Autowired
     private ChapterService chapterService;
 
+    @Autowired
+    private OrderClient orderClient;
 
     @ApiOperation(value = "分页课程列表")
     @PostMapping(value = "{page}/{limit}")
@@ -51,13 +57,28 @@ public class CourseAPIController {
     @ApiOperation("根据ID查询课程")
     @GetMapping("{courseId}")
     public R getById(@ApiParam(name = "courseId", value = "课程ID", required = true)
-                     @PathVariable String courseId) {
+                     @PathVariable String courseId,
+                     HttpServletRequest request) {
 //        查询课程信息和讲师信息
         CourseWebVo courseWebVo = courseService.selectInfoWebById(courseId);
 
 //        查询当前课程的章节信息
         List<ChapterVo> chapterVoList = chapterService.getChapterVideoByCourseID(courseId);
 
-        return R.ok().data("course", courseWebVo).data("chapterVoList", chapterVoList);
+        String memberIdByJwtToken = JwtUtils.getMemberIdByJwtToken(request);
+        //远程调用，判断课程是否被购买
+        boolean buyCourse = orderClient.isBuyCourse(memberIdByJwtToken, courseId);
+
+        return R.ok()
+                .data("course", courseWebVo)
+                .data("chapterVoList", chapterVoList)
+                .data("isbuy",buyCourse);
+    }
+
+    @ApiOperation("根据课程id查询课程信息")
+    @GetMapping("getDto/{courseId}")
+    public CourseInfoVo getCourseInfoDto(@PathVariable String courseId) {
+        CourseInfoVo courseInfoFormById = courseService.getCourseInfoFormById(courseId);
+        return courseInfoFormById;
     }
 }

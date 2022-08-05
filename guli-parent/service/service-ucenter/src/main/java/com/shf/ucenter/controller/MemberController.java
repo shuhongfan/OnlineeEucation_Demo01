@@ -53,6 +53,7 @@ public class MemberController {
         return R.ok().data("item", member);
     }
 
+    @ApiOperation("根据用户id获取用户信息")
     @PostMapping("getInfoUc/{id}")
     public UcenterMemberOrder getInfo(@PathVariable String id) {
 //        根据用户id获取用户信息
