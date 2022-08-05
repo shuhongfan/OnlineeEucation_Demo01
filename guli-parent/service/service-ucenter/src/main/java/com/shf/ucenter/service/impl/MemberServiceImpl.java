@@ -133,4 +133,14 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         return baseMapper.selectOne(memberQueryWrapper);
     }
 
+    /**
+     * 统计某一天的注册人数
+     * @param day
+     * @return
+     */
+    @Override
+    public Integer countRegisterByDay(String day) {
+        return baseMapper.selectRegisterCount(day);
+    }
+
 }

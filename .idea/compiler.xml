@@ -11,6 +11,7 @@
         <module name="service-edu" />
         <module name="service-ucenter" />
         <module name="service-base" />
+        <module name="service-statistics" />
         <module name="api-gateway" />
         <module name="common-utils" />
         <module name="service-oss" />
@@ -35,6 +36,7 @@
       <module name="service-msm" options="-parameters" />
       <module name="service-order" options="-parameters" />
       <module name="service-oss" options="-parameters" />
+      <module name="service-statistics" options="-parameters" />
       <module name="service-ucenter" options="-parameters" />
       <module name="service-vod" options="-parameters" />
     </option>

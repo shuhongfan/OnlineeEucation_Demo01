@@ -51,7 +51,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '谷粒学院后台首页', icon: 'dashboard' }
+      meta: {title: '谷粒学院后台首页', icon: 'dashboard'}
     }]
   },
 
@@ -61,25 +61,25 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/edu/teacher/list',
     name: 'Teacher',
-    meta: { title: '讲师管理', icon: 'peoples' },
+    meta: {title: '讲师管理', icon: 'peoples'},
     children: [
       {
         path: 'list',
         name: 'EduTeacherList',
         component: () => import('@/views/edu/teacher/list'),
-        meta: { title: '讲师列表' }
+        meta: {title: '讲师列表'}
       },
       {
         path: 'create',
         name: 'EduTeacherCreate',
         component: () => import('@/views/edu/teacher/form'),
-        meta: { title: '添加讲师' }
+        meta: {title: '添加讲师'}
       },
       {
         path: 'edit/:id',
         name: 'EduTeacherEdit',
         component: () => import('@/views/edu/teacher/form'),
-        meta: { title: '编辑讲师', noCache: true },
+        meta: {title: '编辑讲师', noCache: true},
         hidden: true
       }
     ]
@@ -91,19 +91,19 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/edu/subject/list',
     name: 'Subject',
-    meta: { title: '课程分类管理', icon: 'nested' },
+    meta: {title: '课程分类管理', icon: 'nested'},
     children: [
       {
         path: 'list',
         name: 'EduSubjectList',
         component: () => import('@/views/edu/subject/list'),
-        meta: { title: '课程分类列表' }
+        meta: {title: '课程分类列表'}
       },
       {
         path: 'import',
         name: 'EduSubjectImport',
         component: () => import('@/views/edu/subject/import'),
-        meta: { title: '导入课程分类' }
+        meta: {title: '导入课程分类'}
       }
     ]
   },
@@ -114,51 +114,73 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/edu/course/list',
     name: 'Course',
-    meta: { title: '课程管理', icon: 'form' },
+    meta: {title: '课程管理', icon: 'form'},
     children: [
       {
         path: 'list',
         name: 'EduCourseList',
         component: () => import('@/views/edu/course/list'),
-        meta: { title: '课程列表' }
+        meta: {title: '课程列表'}
       },
       {
         path: 'info',
         name: 'EduCourseInfo',
         component: () => import('@/views/edu/course/info'),
-        meta: { title: '发布课程' }
+        meta: {title: '发布课程'}
       },
       {
         path: 'info/:id',
         name: 'EduCourseInfoEdit',
         component: () => import('@/views/edu/course/info'),
-        meta: { title: '编辑课程基本信息', noCache: true },
+        meta: {title: '编辑课程基本信息', noCache: true},
         hidden: true
       },
       {
         path: 'chapter/:id',
         name: 'EduCourseChapterEdit',
         component: () => import('@/views/edu/course/chapter'),
-        meta: { title: '编辑课程大纲', noCache: true },
+        meta: {title: '编辑课程大纲', noCache: true},
         hidden: true
       },
       {
         path: 'publish/:id',
         name: 'EduCoursePublishEdit',
         component: () => import('@/views/edu/course/publish'),
-        meta: { title: '发布课程', noCache: true },
+        meta: {title: '发布课程', noCache: true},
         hidden: true
       }
     ]
   },
 
+  {
+    path: '/statistics/daily',
+    component: Layout,
+    redirect: '/statistics/daily/create',
+    name: 'Statistics',
+    meta: {title: '统计分析', icon: 'chart'},
+    children: [
+      {
+        path: 'create',
+        name: 'StatisticsDailyCreate',
+        component: () => import('@/views/statistics/daily/create'),
+        meta: {title: '生成统计'}
+      },
+      {
+        path: 'chart',
+        name: 'StatisticsDayChart',
+        component: () => import('@/views/statistics/daily/chart'),
+        meta: {title: '统计图表'}
+      }
+    ]
+  },
+
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  {path: '*', redirect: '/404', hidden: true}
 ]
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
+  scrollBehavior: () => ({y: 0}),
   routes: constantRoutes
 })
 
