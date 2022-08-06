@@ -4,14 +4,14 @@ export default {
   //1 根据课程id获取章节和小节数据列表
   getAllChapterVideo(courseId) {
     return request({
-      url: '/admin/edu/chapter/getChapterVideo/' + courseId,
+      url: '/edu/admin/chapter/getChapterVideo/' + courseId,
       method: 'get'
     })
   },
   //添加章节
   addChapter(chapter) {
     return request({
-      url: '/admin/edu/chapter',
+      url: '/edu/admin/chapter',
       method: 'post',
       data: chapter
     })
@@ -19,14 +19,14 @@ export default {
   //根据id查询章节
   getChapter(chapterId) {
     return request({
-      url: '/admin/edu/chapter/' + chapterId,
+      url: '/edu/admin/chapter/' + chapterId,
       method: 'get'
     })
   },
   //修改章节
   updateChapter(chapter) {
     return request({
-      url: '/admin/edu/chapter',
+      url: '/edu/admin/chapter',
       method: 'put',
       data: chapter
     })
@@ -34,7 +34,7 @@ export default {
   //删除章节
   deleteChapter(chapterId) {
     return request({
-      url: '/admin/edu/chapter/' + chapterId,
+      url: '/edu/admin/chapter/' + chapterId,
       method: 'delete'
     })
   },

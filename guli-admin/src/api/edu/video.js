@@ -5,7 +5,7 @@ export default {
   //添加小节
   addVideo(video) {
     return request({
-      url: '/admin/edu/video/save-video-info',
+      url: '/edu/admin/video/save-video-info',
       method: 'post',
       data: video
     })
@@ -14,14 +14,14 @@ export default {
   //删除小节
   deleteVideo(id) {
     return request({
-      url: '/admin/edu/video/' + id,
+      url: '/edu/admin/video/' + id,
       method: 'delete'
     })
   },
   //删除视频
   deleteAliyunvod(id) {
     return request({
-      url: '/admin/vod/video/' + id,
+      url: '/vod/admin/video/' + id,
       method: 'delete'
     })
   }

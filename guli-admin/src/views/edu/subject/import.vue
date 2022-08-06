@@ -13,7 +13,7 @@
       <el-form-item label="选择Excel">
         <el-upload
           ref="upload"
-          :action="BASE_API+'/admin/edu/subject/addSubject'"
+          :action="BASE_API+'/edu/admin/subject/addSubject'"
           :auto-upload="false"
           :disabled="importBtnDisabled"
           :limit="1"
@@ -80,7 +80,7 @@ export default {
     },
     // excel导出
     exportData() {
-      window.location.href = this.BASE_API + '/admin/edu/subject/exportSubject'
+      window.location.href = this.BASE_API + '/edu/admin/subject/exportSubject'
     }
   }
 }

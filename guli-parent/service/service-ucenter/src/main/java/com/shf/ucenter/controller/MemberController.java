@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/ucenter/member")
-@CrossOrigin
 public class MemberController {
 
     @Autowired

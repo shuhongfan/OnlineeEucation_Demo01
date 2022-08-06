@@ -27,9 +27,8 @@ import java.util.List;
  * @since 2022-08-01
  */
 @Api("课程分类管理")
-@CrossOrigin
 @RestController
-@RequestMapping("/admin/edu/subject")
+@RequestMapping("/edu/admin/subject")
 public class SubjectController {
     @Autowired
     private SubjectService subjectService;

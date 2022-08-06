@@ -18,7 +18,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/cms/banner")
 @Api("网站首页Banner列表")
-@CrossOrigin
 public class BannerApiController {
     @Autowired
     private BannerService bannerService;

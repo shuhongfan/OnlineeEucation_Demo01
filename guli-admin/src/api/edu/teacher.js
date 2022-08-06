@@ -6,7 +6,7 @@ export default {
   getTeacherListPage(current, limit, teacherQuery) {
     return request({
       //url: '/admin/edu/teacher/pageTeacherCondition/'+current+"/"+limit,
-      url: `/admin/edu/teacher/${current}/${limit}`,
+      url: `/edu/admin/teacher/${current}/${limit}`,
       method: 'post',
       //teacherQuery条件对象，后端使用RequestBody获取数据
       //data表示把对象转换json进行传递到接口里面
@@ -16,14 +16,14 @@ export default {
   //删除讲师
   deleteTeacherId(id) {
     return request({
-      url: `/admin/edu/teacher/${id}`,
+      url: `/edu/admin/teacher/${id}`,
       method: 'delete'
     })
   },
   //添加讲师
   addTeacher(teacher) {
     return request({
-      url: `/admin/edu/teacher`,
+      url: `/edu/admin/teacher`,
       method: 'post',
       data: teacher
     })
@@ -31,14 +31,14 @@ export default {
   //根据id查询讲师
   getTeacherInfo(id) {
     return request({
-      url: `/admin/edu/teacher/${id}`,
+      url: `/edu/admin/teacher/${id}`,
       method: 'get'
     })
   },
   //修改讲师
   updateTeacherInfo(teacher) {
     return request({
-      url: `/admin/edu/teacher/`,
+      url: `/edu/admin/teacher/`,
       method: 'put',
       data: teacher
     })

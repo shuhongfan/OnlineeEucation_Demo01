@@ -7,29 +7,34 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="service-msm" />
         <module name="service-edu" />
-        <module name="service-ucenter" />
         <module name="service-base" />
-        <module name="service-statistics" />
-        <module name="api-gateway" />
-        <module name="common-utils" />
         <module name="service-oss" />
+        <module name="common-utils" />
         <module name="service-cms" />
         <module name="service-order" />
-        <module name="mybatis-plus" />
         <module name="service-vod" />
+        <module name="service-acl" />
+        <module name="service-msm" />
+        <module name="service-ucenter" />
+        <module name="service-statistics" />
+        <module name="api-gateway" />
+        <module name="spring-security" />
+        <module name="canal-client" />
+        <module name="mybatis-plus" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
+      <module name="canal-client" options="-parameters" />
       <module name="common" options="" />
       <module name="common-utils" options="-parameters" />
       <module name="infrastructure" options="" />
       <module name="mybatis-plus" options="-parameters" />
       <module name="service" options="" />
+      <module name="service-acl" options="-parameters" />
       <module name="service-base" options="-parameters" />
       <module name="service-cms" options="-parameters" />
       <module name="service-edu" options="-parameters" />
@@ -39,6 +44,7 @@
       <module name="service-statistics" options="-parameters" />
       <module name="service-ucenter" options="-parameters" />
       <module name="service-vod" options="-parameters" />
+      <module name="spring-security" options="-parameters" />
     </option>
   </component>
 </project>

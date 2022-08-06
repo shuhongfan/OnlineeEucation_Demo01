@@ -55,7 +55,7 @@
       <div class="more-sign">
         <h6>社交帐号直接注册</h6>
         <ul>
-          <li><a id="weixin" class="weixin" target="_blank" href="http://huaan.free.idcfengye.com/api/ucenter/wx/login"><i
+          <li><a id="weixin" class="weixin" target="_blank" href="http://localhost:8222/ucenter/api/wx/login"><i
             class="iconfont icon-weixin"/></a></li>
           <li><a id="qq" class="qq" target="_blank" href="#"><i class="iconfont icon-qq"/></a></li>
         </ul>
@@ -86,7 +86,7 @@
       }
     },
     methods: {
-     
+
        //注册提交的方法
        submitRegister() {
          registerApi.registerMember(this.params)
@@ -98,7 +98,7 @@
               })
             //跳转登录页面
             this.$router.push({path:'/login'})
-              
+
           })
        },
        timeDown() {

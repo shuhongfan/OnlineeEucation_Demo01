@@ -111,7 +111,7 @@ export default {
     async fetchData(page = 1) {
       this.page = page
       this.listLoading = true
-      let res = await teacher.getPageList(this.page, this.limit, this.searchObj)
+      let res = await teacher.getTeacherListPage(this.page, this.limit, this.searchObj)
       if (res.code === 20000) {
         this.list = res.data.rows
         this.total = res.data.total

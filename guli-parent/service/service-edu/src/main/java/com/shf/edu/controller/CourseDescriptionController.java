@@ -22,9 +22,8 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @Api(description = "课程简介管理")
-@CrossOrigin //跨域
 @RestController
-@RequestMapping("/admin/edu/course")
+@RequestMapping("/edu/admin/course")
 public class CourseDescriptionController {
     @Autowired
     private CourseDescriptionService courseDescriptionService;

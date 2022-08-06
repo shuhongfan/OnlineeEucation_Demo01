@@ -18,7 +18,6 @@ import java.util.Map;
  * @since 2022-08-05
  */
 @RestController
-@CrossOrigin
 @RequestMapping("/statistics/daily")
 public class DailyController {
 

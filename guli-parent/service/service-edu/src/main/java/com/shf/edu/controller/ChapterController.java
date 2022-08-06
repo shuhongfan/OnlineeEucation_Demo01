@@ -21,8 +21,7 @@ import java.util.List;
  * @since 2022-08-01
  */
 @RestController
-@CrossOrigin
-@RequestMapping("/admin/edu/chapter")
+@RequestMapping("/edu/admin/chapter")
 public class ChapterController {
     @Autowired
     private ChapterService chapterService;

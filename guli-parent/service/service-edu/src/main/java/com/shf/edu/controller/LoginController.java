@@ -4,8 +4,7 @@ import com.shf.commonutils.R;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/eduservice/user")
-@CrossOrigin
+@RequestMapping("/edu/user")
 public class LoginController {
 
     @PostMapping("login")

@@ -15,13 +15,13 @@ import java.util.List;
 @Component
 public interface VodClient {
     @ApiOperation("删除视频")
-    @DeleteMapping("/admin/vod/video/{videoId}")
+    @DeleteMapping("/vod/admin/video/{videoId}")
     public R removeVideo(
             @ApiParam(name = "videoId", value = "云端视频ID", required = true)
             @PathVariable String videoId);
 
     @ApiOperation("批量删除视频")
-    @DeleteMapping("/admin/vod/video/delete-batch")
+    @DeleteMapping("/vod/admin/video/delete-batch")
     public R removeVideoList(
             @ApiParam(name = "videoIdList", value = "云端视频ID", required = true)
             @RequestParam("videoList") List<String> videoList

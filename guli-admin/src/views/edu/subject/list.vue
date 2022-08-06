@@ -41,7 +41,7 @@ export default {
 
   methods: {
     async fetchNodeList() {
-      let response = await subject.getNestedTreeList();
+      let response = await subject.getSubjectList();
       if (response.success === true) {
         this.subjectList = response.data.items
       }

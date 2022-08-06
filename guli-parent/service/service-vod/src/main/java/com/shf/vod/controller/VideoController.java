@@ -10,7 +10,6 @@ import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 @Api("阿里云视频点播微服务")
-@CrossOrigin
 @RestController
 @RequestMapping("/vod/video")
 public class VideoController {

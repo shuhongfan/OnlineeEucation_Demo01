@@ -10,9 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Api("阿里云文件管理")
-@CrossOrigin
 @RestController
-@RequestMapping("/admin/oss/file")
+@RequestMapping("/oss/admin/file")
 public class FileController {
 
     @Autowired

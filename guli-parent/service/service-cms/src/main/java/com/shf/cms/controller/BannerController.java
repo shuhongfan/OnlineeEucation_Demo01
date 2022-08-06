@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * @since 2022-08-03
  */
 @RestController
-@RequestMapping("/admin/cms/banner")
+@RequestMapping("/cms/admin/banner")
 public class BannerController {
     @Autowired
     private BannerService bannerService;

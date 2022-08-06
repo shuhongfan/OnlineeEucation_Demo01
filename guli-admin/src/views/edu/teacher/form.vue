@@ -44,7 +44,7 @@
           :width="300"
           :height="300"
           :key="imagecropperKey"
-          :url="BASE_API+'/admin/oss/file/upload'"
+          :url="BASE_API+'/oss/admin/file/upload'"
           field="file"
           @close="close"
           @crop-upload-success="cropSuccess"/>
@@ -102,7 +102,7 @@ export default {
       }
     },
     async saveData() {
-      let res = await teacher.save(this.teacher);
+      let res = await teacher.addTeacher(this.teacher);
       if (res.code === 20000) {
         this.$message.success("保存成功")
         this.$router.push("/edu/teacher")
@@ -111,7 +111,7 @@ export default {
       }
     },
     async getById(id) {
-      let res = await teacher.getByID(id);
+      let res = await teacher.getTeacherInfo(id);
       if (res.code === 20000) {
         this.$message.success("获取数据成功")
         this.teacher = res.data.item
@@ -119,7 +119,7 @@ export default {
     },
     async updateData() {
       this.saveBtnDisabled = true;
-      let res = await teacher.updateById(this.teacher);
+      let res = await teacher.updateTeacherInfo(this.teacher);
       if (res.code === 20000) {
         this.$message.success("修改成功！")
         this.$router.push("/edu/teacher")

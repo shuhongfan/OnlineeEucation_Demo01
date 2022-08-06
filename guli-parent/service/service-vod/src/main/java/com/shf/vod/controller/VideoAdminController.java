@@ -12,9 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @Api("阿里云视频点播微服务")
-@CrossOrigin
 @RestController
-@RequestMapping("/admin/vod/video")
+@RequestMapping("/vod/admin/video")
 public class VideoAdminController {
     @Autowired
     private VideoService videoService;

@@ -26,7 +26,6 @@ import java.util.Map;
  * @since 2022-08-01
  */
 @RestController
-@CrossOrigin
 @RequestMapping("/edu/comment")
 public class CommentController {
 

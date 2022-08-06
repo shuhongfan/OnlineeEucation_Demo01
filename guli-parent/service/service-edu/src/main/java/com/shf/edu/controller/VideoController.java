@@ -19,9 +19,8 @@ import org.springframework.web.bind.annotation.*;
  * @since 2022-08-01
  */
 @Api("课时管理")
-@CrossOrigin
 @RestController
-@RequestMapping("/admin/edu/video")
+@RequestMapping("/edu/admin/video")
 public class VideoController {
     @Autowired
     private VideoService videoService;

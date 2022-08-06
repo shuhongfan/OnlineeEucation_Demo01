@@ -26,9 +26,8 @@ import java.util.List;
  * @since 2022-08-01
  */
 @Api("课程管理")
-@CrossOrigin
 @RestController
-@RequestMapping("/admin/edu/course")
+@RequestMapping("/edu/admin/course")
 public class CourseController {
     @Autowired
     private CourseService courseService;

@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient("service-edu")
 public interface EduClient {
     @ApiOperation("根据课程id查询课程信息")
-    @GetMapping("/api/edu/course/getDto/{courseId}")
+    @GetMapping("/edu/api/course/getDto/{courseId}")
     public CourseWebVoOrder getCourseInfoDto(@PathVariable String courseId);
 }
